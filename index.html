@@ -113,9 +113,9 @@
         <textarea  id="txt_input" class="form-control" rows="5"></textarea>
         <br/><br/>
          <button type="button" id="btn_jia" onclick="jiami()" class="btn btn-primary">Encryption of base64</button>
-         <button type="button" id="btn_jie" onclick="jiemi()" class="btn btn-primary">decryption of base64</button>&nbsp;&nbsp;
+         <button type="button" id="btn_jie" onclick="jiemi()" class="btn btn-primary">Decryption of base64</button>&nbsp;&nbsp;
          <br/><br/>
-         <button type="button" id="btn_ChineseToUnicode" onclick="tounicode()" class="btn btn-primary">character to Unicode</button>
+         <button type="button" id="btn_ChineseToUnicode" onclick="tounicode()" class="btn btn-primary">Character to Unicode</button>
          <button type="button" id="btn_UnicodeToChinese" onclick="tohanzi()" class="btn btn-primary">Unicode to character</button>
          <br/><br/>
 
@@ -197,7 +197,7 @@ function tounicode()
    var txt_input=$_("txt_input").value;
    var data=txt_input;
    var str =''; 
-   if(data == '') str='请输入汉字';
+   if(data == '') str='please input character';
    for(var i=0;i<data.length;i++)
    {
       str+="\\u"+parseInt(data[i].charCodeAt(0),10).toString(16);
@@ -209,7 +209,7 @@ function tohanzi(data)
     var txt_input=$_("txt_input").value;
     var data=txt_input;
     var str ='';
-    if(data == '') str='请输入十六进制unicode';
+    if(data == '') str='please input unicode';
     data = data.split("\\u");
     for(var i=0;i<data.length;i++)
     {
