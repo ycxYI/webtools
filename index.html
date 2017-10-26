@@ -67,7 +67,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="https://baike.baidu.com/item/base64/8545775?fr=aladdin" target="_blank">base64说明</a></li>
+              <li><a href="https://baike.baidu.com/item/base64/8545775?fr=aladdin" target="_blank">base64 explain(China)</a></li>
               
             </ul>
           </div>
@@ -105,16 +105,17 @@
 
         <div class="floor" id="unicodeTo">
         <div class="page-header">
-        <h2>base64加密解密||unicode汉字转换</h2>
+        <h2>Encryption and decryption of base64</h2><br/>
+	<h2>Unicode character conversion</h2>
         </div>
 
         <textarea  id="txt_input" class="form-control" rows="5"></textarea>
         <br/><br/>
-         <button type="button" id="btn_jia" onclick="jiami()" class="btn btn-primary">base64加密</button>
-         <button type="button" id="btn_jie" onclick="jiemi()" class="btn btn-primary">base64解密</button>&nbsp;&nbsp;
+         <button type="button" id="btn_jia" onclick="jiami()" class="btn btn-primary">Encryption of base64</button>
+         <button type="button" id="btn_jie" onclick="jiemi()" class="btn btn-primary">decryption of base64</button>&nbsp;&nbsp;
          <br/><br/>
-         <button type="button" id="btn_ChineseToUnicode" onclick="tounicode()" class="btn btn-primary">汉字转Unicode</button>
-         <button type="button" id="btn_UnicodeToChinese" onclick="tohanzi()" class="btn btn-primary">Unicode转汉字</button>
+         <button type="button" id="btn_ChineseToUnicode" onclick="tounicode()" class="btn btn-primary">character to Unicode</button>
+         <button type="button" id="btn_UnicodeToChinese" onclick="tohanzi()" class="btn btn-primary">Unicode to character</button>
          <br/><br/>
 
         <textarea  id="txt_output" class="form-control" rows="5"></textarea>  
@@ -122,13 +123,14 @@
         
 
         <div class="floor" id="imageTo">
-        <!-- 图片转base64 -->
+        <!-- image to base64 -->
         <div id="imageTobase64"></div>
-        <h2>图片链接转base64||本地图片转base64</h2>
-        <input id="image_Net_Url" type="text" class="form-control" placeholder="这里输入图片链接"/><br/><br/>
+        <h2>image url to base64</h2><br/>
+	<h2>local url to base64</h2>
+        <input id="image_Net_Url" type="text" class="form-control" placeholder="there input image url"/><br/><br/>
         <input accept="image/*" name="upimage" id="upload_file" type="file" class="btn btn-lg btn-default"><br/><br/>
         <image src="" id="show_image" class="img-polaroid"/><br/><br/>
-        <textarea id="base64_output" name="Word"  placeholder="这里输出base64码" class="form-control" rows="5"></textarea>
+        <textarea id="base64_output" name="Word"  placeholder="there output base64" class="form-control" rows="5"></textarea>
         </div>
         <br/><br/>
 <br/><br/>
