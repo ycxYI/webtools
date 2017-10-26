@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+       <meta charset="utf-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+       <script src="jquery/jquery.js"></script>
+        <link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bootstrap-3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+        <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <script src="JS/jquerynav.js"></script>
+
+
+        <link href="theme.css" rel="stylesheet">
+        <style>
+#nav {
+	right: 20px;
+    bottom:20px;
+	list-style: none;
+	margin: 0;
+	position: fixed;
+}
+
+#nav li {
+	margin-bottom: 2px;
+}
+
+#nav a {
+	background: #ededed;
+	color: #666;
+	display: block;
+	font-size: 14px;
+	padding: 5px 10px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+#nav a:hover {
+	background: #dedede;
+}
+
+#nav .current a {
+	background: #666;
+	color: #ededed;
+}
+</style>
+    </head>
+    <body>
+        <ul id="nav" >
+            <li class="current"><a href="#home">home</a></li>
+            <li><a href="#unicodeTo">unicode</a></li>
+            <li><a href="#imageTo">image</a></li>
+        </ul>
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">Ycx Bootstrap theme Tools Demo</a>
+            
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="https://baike.baidu.com/item/base64/8545775?fr=aladdin" target="_blank">base64说明</a></li>
+              
+            </ul>
+          </div>
+          <!-- <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div> -->
+          <!--/.nav-collapse -->
+        </div>
+      </nav>
+
+    
+
+     <div class="container theme-showcase" role="main">
+        <div class="jumbotron" id="home">
+                <h1>Code Tools</h1>
+                <p>write somes tools.</p>
+                <p>from ycx.</p>
+        </div>
+
+        <div class="floor" id="unicodeTo">
+        <div class="page-header">
+        <h2>base64加密解密||unicode汉字转换</h2>
+        </div>
+
+        <textarea  id="txt_input" class="form-control" rows="5"></textarea>
+        <br/><br/>
+         <button type="button" id="btn_jia" onclick="jiami()" class="btn btn-primary">base64加密</button>
+         <button type="button" id="btn_jie" onclick="jiemi()" class="btn btn-primary">base64解密</button>&nbsp;&nbsp;
+         <br/><br/>
+         <button type="button" id="btn_ChineseToUnicode" onclick="tounicode()" class="btn btn-primary">汉字转Unicode</button>
+         <button type="button" id="btn_UnicodeToChinese" onclick="tohanzi()" class="btn btn-primary">Unicode转汉字</button>
+         <br/><br/>
+
+        <textarea  id="txt_output" class="form-control" rows="5"></textarea>  
+        </div>
+        
+
+        <div class="floor" id="imageTo">
+        <!-- 图片转base64 -->
+        <div id="imageTobase64"></div>
+        <h2>图片链接转base64||本地图片转base64</h2>
+        <input id="image_Net_Url" type="text" class="form-control" placeholder="这里输入图片链接"/><br/><br/>
+        <input accept="image/*" name="upimage" id="upload_file" type="file" class="btn btn-lg btn-default"><br/><br/>
+        <image src="" id="show_image" class="img-polaroid"/><br/><br/>
+        <textarea id="base64_output" name="Word"  placeholder="这里输出base64码" class="form-control" rows="5"></textarea>
+        </div>
+        <br/><br/>
+<br/><br/>
+</div>
+</body>
+
+<script type="text/javascript">
+
+//写法打包
+function $_(id) {
+    var idHead=id.substr(0,1);
+    var idRoot=id.substr(1,id.length);
+    if(idHead.indexOf("#")>-1) return document.getElementById(idRoot);
+    else if(idHead.indexOf("@")>-1) return document.getElementsByName(idRoot);
+    else if(idHead.indexOf(".")>-1) return document.getElementsByClassName(idRoot);
+    else  return document.getElementById(id);
+}
+
+
+$(document).ready(function() {
+
+			$('#nav').onePageNav();
+
+		});
+
+//js自带base64自带加解密（不可用中文）
+//alert(window.atob("dGVzdA=="));
+ 
+   //1.加密解密方法使用：
+//1.加密  
+// var str = "这是中文编码";  
+// var base = new Base64();  
+// var result = base.encode(str);  
+
+
+// //2.解密  
+// var str2="MjAxNzAxMTdfMjk2NTI=";
+// var result2 = base.decode(str2);  
+
+
+// document.write("加密："+result);  
+// document.write("<br\>解密："+result2);  
+
+
+function jiami(){
+    var base = new Base64();  
+    var txt_input=$_("txt_input").value;
+    $_("txt_output").value=base.encode(txt_input);
+    
+}
+
+function jiemi(){
+    var base = new Base64();  
+    var txt_input=$_("txt_input").value;
+    $_("txt_output").value=base.decode(txt_input);
+}
+
+
+
+function tounicode()
+{
+   var txt_input=$_("txt_input").value;
+   var data=txt_input;
+   var str =''; 
+   if(data == '') str='请输入汉字';
+   for(var i=0;i<data.length;i++)
+   {
+      str+="\\u"+parseInt(data[i].charCodeAt(0),10).toString(16);
+   }
+   $_("txt_output").value=str;
+}
+function tohanzi(data)
+{
+    var txt_input=$_("txt_input").value;
+    var data=txt_input;
+    var str ='';
+    if(data == '') str='请输入十六进制unicode';
+    data = data.split("\\u");
+    for(var i=0;i<data.length;i++)
+    {
+        str+=String.fromCharCode(parseInt(data[i],16).toString(10));
+    }
+    $_("txt_output").value=str;
+}
+
+//本地图片转base64
+$_("upload_file").onchange = function () {
+                gen_base64();
+            };
+            
+function gen_base64() {
+                var file = $_('upload_file').files[0];
+                r = new FileReader();  //本地预览
+                r.onload = function(){
+                    $_('base64_output').value = r.result;
+                    $_('show_image').src=r.result;
+                    $_('show_image').style="height:300px; width:300px;";
+                }
+                r.readAsDataURL(file);    //Base64
+            }
+
+//网络图片链接转base64
+//urlstr="http://f10.baidu.com/it/u=1981748892,3031683197&fm=72"
+$_("image_Net_Url").onblur=function (){
+    convertImgToBase64($_("image_Net_Url").value, function(base64Img){
+    // Base64DataURL
+    $_('show_image').src=base64Img;
+    $_('base64_output').value=base64Img;
+  });
+}
+
+
+
+//-------------------------------------------------------------------------------------
+//加密、解密算法封装
+//-------------------------------------------------------------------------------------
+   
+function Base64() {  
+   
+    // private property  
+    _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";  
+   
+    // public method for encoding  
+    this.encode = function (input) {  
+        var output = "";  
+        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;  
+        var i = 0;  
+        input = _utf8_encode(input);  
+        while (i < input.length) {  
+            chr1 = input.charCodeAt(i++);  
+            chr2 = input.charCodeAt(i++);  
+            chr3 = input.charCodeAt(i++);  
+            enc1 = chr1 >> 2;  
+            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);  
+            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);  
+            enc4 = chr3 & 63;  
+            if (isNaN(chr2)) {  
+                enc3 = enc4 = 64;  
+            } else if (isNaN(chr3)) {  
+                enc4 = 64;  
+            }  
+            output = output +  
+            _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +  
+            _keyStr.charAt(enc3) + _keyStr.charAt(enc4);  
+        }  
+        return output;  
+    }  
+   
+    // public method for decoding  
+    this.decode = function (input) {  
+        var output = "";  
+        var chr1, chr2, chr3;  
+        var enc1, enc2, enc3, enc4;  
+        var i = 0;  
+        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");  
+        while (i < input.length) {  
+            enc1 = _keyStr.indexOf(input.charAt(i++));  
+            enc2 = _keyStr.indexOf(input.charAt(i++));  
+            enc3 = _keyStr.indexOf(input.charAt(i++));  
+            enc4 = _keyStr.indexOf(input.charAt(i++));  
+            chr1 = (enc1 << 2) | (enc2 >> 4);  
+            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);  
+            chr3 = ((enc3 & 3) << 6) | enc4;  
+            output = output + String.fromCharCode(chr1);  
+            if (enc3 != 64) {  
+                output = output + String.fromCharCode(chr2);  
+            }  
+            if (enc4 != 64) {  
+                output = output + String.fromCharCode(chr3);  
+            }  
+        }  
+        output = _utf8_decode(output);  
+        return output;  
+    }  
+   
+    // private method for UTF-8 encoding  
+    _utf8_encode = function (string) {  
+        string = string.replace(/\r\n/g,"\n");  
+        var utftext = "";  
+        for (var n = 0; n < string.length; n++) {  
+            var c = string.charCodeAt(n);  
+            if (c < 128) {  
+                utftext += String.fromCharCode(c);  
+            } else if((c > 127) && (c < 2048)) {  
+                utftext += String.fromCharCode((c >> 6) | 192);  
+                utftext += String.fromCharCode((c & 63) | 128);  
+            } else {  
+                utftext += String.fromCharCode((c >> 12) | 224);  
+                utftext += String.fromCharCode(((c >> 6) & 63) | 128);  
+                utftext += String.fromCharCode((c & 63) | 128);  
+            }  
+   
+        }  
+        return utftext;  
+    }  
+   
+    // private method for UTF-8 decoding  
+    _utf8_decode = function (utftext) {  
+        var string = "";  
+        var i = 0;  
+        var c = c1 = c2 = 0;  
+        while ( i < utftext.length ) {  
+            c = utftext.charCodeAt(i);  
+            if (c < 128) {  
+                string += String.fromCharCode(c);  
+                i++;  
+            } else if((c > 191) && (c < 224)) {  
+                c2 = utftext.charCodeAt(i+1);  
+                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));  
+                i += 2;  
+            } else {  
+                c2 = utftext.charCodeAt(i+1);  
+                c3 = utftext.charCodeAt(i+2);  
+                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));  
+                i += 3;  
+            }  
+        }  
+        return string;  
+    }  
+}
+
+
+//imageTobase64
+//图片转base64
+function convertImgToBase64(url, callback, outputFormat){
+    var canvas = document.createElement('CANVAS'),
+      ctx = canvas.getContext('2d'),
+      img = new Image;
+    img.crossOrigin = 'Anonymous';
+    img.onload = function(){
+      canvas.height = img.height;
+      canvas.width = img.width;
+      ctx.drawImage(img,0,0);
+      var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+      callback.call(this, dataURL);
+      canvas = null; 
+    };
+    img.src = url;
+}
+  
+
+//-------------------------------------------------------------------------------------
+//加密算法封装结束
+//-------------------------------------------------------------------------------------
+    </script>
+</html>
